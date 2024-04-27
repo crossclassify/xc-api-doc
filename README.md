@@ -75,12 +75,5 @@ This API requires the following dependencies:
 
 ## Troubleshooting
 
-For common issues and their solutions, visit the FAQ section on [app.crossclassify.com](https://app.crossclassify.com).
+If you have any issues , contact us at [support@crossclassify.com](support@crossclassify.com).
 
-## Contributors
-
-List the names and contact information of people who contributed to the API.
-
-## License
-
-Specify the license under which this API is released, and include a link to the full license text.
