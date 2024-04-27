@@ -1,0 +1,710 @@
+{
+    "openapi" : "3.1.0",
+    "info" : {
+      "title" : "CrossClassify API",
+      "description" : "take the `x-api-key` and `auth token` from project's settings in <a href='https://app.crossclassify.com'>app.crossclassify.com</a>",
+      "version" : "1.8.3"
+    },
+    "servers" : [ {
+      "url" : "https://api.crossclassify.com/v1/",
+      "description" : "use for API calls"
+    }],
+    "paths" : {
+      "/projects/{projectId}/fraudServices/{serviceName}/newDecision" : {
+        "post" : {
+          "summary" : "Start the process of making a new decision for the requested account.",
+          "requestBody" : {
+            "$ref" : "#/components/requestBodies/newDecision_post"
+          },
+          "responses" : {
+            "201" : {
+              "$ref" : "#/components/responses/newDecision_202"
+            },
+            "default" : {
+              "$ref" : "#/components/responses/error"
+            }
+          },
+          "parameters" : [ {
+            "$ref" : "#/components/parameters/Fraudservice_serviceName"
+          }, {
+            "$ref" : "#/components/parameters/Project__id"
+          } ],
+          "operationId" : "postprojects/{projectId}/fraudServices/{serviceName}/newDecisions",
+          "tags" : [ "newDecision" ]
+        }
+      },
+      "/projects/{projectId}/fraudServices/{serviceName}/newDecision/{newDecisionId}" : {
+        "get" : {
+          "summary" : "Retrieves the response of the requested decision.",
+          "responses" : {
+            "200" : {
+              "description" : "newDecision document fetched successfully",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/newDecision"
+                  }
+                }
+              }
+            },
+            "default" : {
+              "$ref" : "#/components/responses/error"
+            }
+          },
+          "parameters" : [ {
+            "$ref" : "#/components/parameters/newDecision__id"
+          }, {
+            "$ref" : "#/components/parameters/Fraudservice_serviceName"
+          }, {
+            "$ref" : "#/components/parameters/Project__id"
+          } ],
+          "operationId" : "getnewDecisionItem",
+          "tags" : [ "newDecision" ]
+        }
+      }
+    },
+    "components" : {
+      "schemas" : {
+        "202" : {
+          "type" : "object",
+          "properties" : {
+            "_id" : {
+              "type" : "string",
+              "example" : "62dbb883cab2bd0694c32413"
+            },
+            "_updated" : {
+              "type" : "string",
+              "example" : "Sat, 23 Jul 2022 08:59:46 GMT"
+            },
+            "_created" : {
+              "type" : "string",
+              "example" : "Sat, 23 Jul 2022 08:59:46 GMT"
+            },
+            "_status" : {
+              "type" : "string",
+              "example" : "ok"
+            },
+            "_etag" : {
+              "type" : "string",
+              "example" : "3a48ef98d179551ae9d5cbd409d4affd44ed5591"
+            },
+            "_links" : {
+              "type" : "object",
+              "properties" : {
+                "related" : {
+                  "type" : "object",
+                  "properties" : {
+                    "projectId" : {
+                      "type" : "object",
+                      "properties" : {
+                        "title" : {
+                          "type" : "string",
+                          "example" : "Project"
+                        },
+                        "href" : {
+                          "type" : "string",
+                          "format" : "uri",
+                          "example" : "projects/62274ab07881f1715a512db6/fraudServices/opening/newDecision/62274ab07881f1715a512db6"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "newDecision" : {
+          "type" : "object",
+          "properties" : {
+            "_id" : {
+              "$ref" : "#/components/schemas/newDecision__id"
+            },
+            "_updated" : {
+              "type" : "string",
+              "example" : "Sat, 23 Jul 2022 08:59:46 GMT"
+            },
+            "_created" : {
+              "type" : "string",
+              "example" : "Sat, 23 Jul 2022 08:59:46 GMT"
+            },
+            "_etag" : {
+              "type" : "string",
+              "example" : "3a48ef98d179551ae9d5cbd409d4affd44ed5591"
+            },
+            "projectId" : {
+              "$ref" : "#/components/schemas/Project__id"
+            },
+            "account" : {
+              "type" : "object",
+              "properties" : {
+                "email" : {
+                  "type" : "string"
+                }
+              },
+              "example" : {
+                "email" : "smith@example.com"
+              }
+            },
+            "serviceName" : {
+              "type" : "string",
+              "example" : "opening"
+            },
+            "status" : {
+              "type" : "string",
+              "example" : "ready"
+            },
+            "isBlocked" : {
+              "nullable" : true,
+              "type" : "boolean",
+              "example" : false
+            },
+            "isManual" : {
+              "nullable" : true,
+              "type" : "boolean",
+              "example" : false
+            },
+            "riskLevel" : {
+              "type" : "string",
+              "example" : "low"
+            }
+          }
+        },
+        "newDecision_post" : {
+          "type" : "object",
+          "properties" : {
+            "status" : {
+              "type" : "string",
+              "example" : "cal_for_calc"
+            },
+            "account" : {
+              "type" : "object",
+              "properties" : {
+                "email" : {
+                  "type" : "string"
+                }
+              },
+              "example" : {
+                "email" : "smith@yahoo.com"
+              }
+            },
+            "device" : {
+              "type" : "object",
+              "properties" : {
+                "fingerprint" : {
+                  "type" : "string"
+                }
+              },
+              "example" : {
+                "fingerprint" : "kjdfhfuisdgfhui3424e3rd"
+              }
+            },
+            "formviewid" : {
+              "type" : "string",
+              "example" : "hfdhfi"
+            },
+            "isBlocked" : {
+              "nullable" : true,
+              "type" : "boolean",
+              "example" : true
+            },
+            "decisionDetails" : {
+              "type" : "object",
+              "properties" : {
+                "decisionOnDevice" : {
+                  "type" : "object",
+                  "properties" : {
+                    "decisionId" : {
+                      "$ref" : "#/components/schemas/Decision__id"
+                    }
+                  }
+                },
+                "decisionOnAccount" : {
+                  "type" : "object",
+                  "properties" : {
+                    "decisionId" : {
+                      "$ref" : "#/components/schemas/Decision__id"
+                    }
+                  }
+                }
+              }
+            },
+            "firstSeenBySystem" : {
+              "type" : "boolean",
+              "example" : false
+            }
+          }
+        },
+        "Project__id" : {
+          "type" : "string",
+          "format" : "objectid",
+          "example" : "62274ab07881f1715a512db6"
+        },
+        "App__id" : {
+          "type" : "string",
+          "format" : "objectid",
+          "example" : "63820c1bb985de081ecd413c"
+        },
+        "App__name" : {
+          "type" : "string",
+          "format" : "objectid",
+          "example" : "Safegate"
+        },
+        "App__type" : {
+          "type" : "string",
+          "format" : "objectid",
+          "example" : "android"
+        },
+        "Geo__ip" : {
+          "type" : "string",
+          "format" : "objectid",
+          "example" : "45.132.225.238"
+        },
+        "Geo__city" : {
+          "type" : "string",
+          "format" : "objectid",
+          "example" : "Melbourne"
+        },
+        "Geo__country" : {
+          "type" : "string",
+          "format" : "objectid",
+          "example" : "Australia"
+        },
+        "Geo__lat" : {
+          "type" : "string",
+          "format" : "objectid",
+          "example" : "-37.81589889526367"
+        },
+        "Geo__long" : {
+          "type" : "string",
+          "format" : "objectid",
+          "example" : "144.96690368652344"
+        },
+        "User__id" : {
+          "type" : "string",
+          "format" : "objectid",
+          "example" : "62274ba578a7167f35d1fa98"
+        },
+        "Fraudservice__id" : {
+          "type" : "string",
+          "format" : "objectid"
+        },
+        "Fraudservicearchives__id" : {
+          "type" : "string",
+          "format" : "objectid"
+        },
+        "newDecision__id" : {
+          "type" : "string",
+          "format" : "objectid",
+          "example" : "63d11a79b6a18c7757287eec"
+        },
+        "Decision__id" : {
+          "type" : "string",
+          "format" : "objectid",
+          "example" : "6385df9ee514ed7f139f835b"
+        },
+        "Error" : {
+          "type" : "object",
+          "properties" : {
+            "_status" : {
+              "type" : "string",
+              "example" : "OK"
+            },
+            "_error" : {
+              "type" : "object",
+              "properties" : {
+                "code" : {
+                  "type" : "integer"
+                },
+                "message" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "required" : [ "_status", "_error" ]
+        },
+        "respone_metadata" : {
+          "type" : "object",
+          "properties" : {
+            "page" : {
+              "type" : "string"
+            },
+            "total" : {
+              "type" : "integer"
+            },
+            "max_results" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "respone_links" : {
+          "type" : "object",
+          "properties" : {
+            "parent" : {
+              "type" : "object",
+              "properties" : {
+                "title" : {
+                  "type" : "string",
+                  "format" : "uri"
+                },
+                "href" : {
+                  "type" : "string",
+                  "format" : "uri"
+                }
+              }
+            },
+            "self" : {
+              "type" : "object",
+              "properties" : {
+                "title" : {
+                  "type" : "string",
+                  "format" : "uri"
+                },
+                "href" : {
+                  "type" : "string",
+                  "format" : "uri"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses" : {
+        "newDecision_202" : {
+          "description" : "Scoring (Decision Making) process started for the latest form Interaction of `smith@example.com` ",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/202"
+              }
+            }
+          }
+        },
+        "error" : {
+          "description" : "An error message",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Error"
+              }
+            }
+          }
+        }
+      },
+      "parameters" : {
+        "App__id" : {
+          "in" : "path",
+          "name" : "appId",
+          "required" : true,
+          "description" : "",
+          "example" : "",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "Project__id" : {
+          "in" : "path",
+          "name" : "projectId",
+          "required" : true,
+          "description" : "",
+          "example" : "6374ccdfc84fea8d3f2b3d32",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "User__id" : {
+          "in" : "path",
+          "name" : "userId",
+          "required" : true,
+          "description" : "",
+          "example" : "",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "Token__id" : {
+          "in" : "path",
+          "name" : "tokenId",
+          "required" : true,
+          "description" : "",
+          "example" : "",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "Fraudservice__id" : {
+          "in" : "path",
+          "name" : "fraudserviceId",
+          "required" : true,
+          "description" : "",
+          "example" : "",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "Fraudservice_serviceName" : {
+          "in" : "path",
+          "name" : "serviceName",
+          "required" : true,
+          "description" : "",
+          "examples" : {
+            "opening" : {
+              "summary" : "\"Account Opening\" Fraud Detection Service",
+              "description" : "Use `opening` for \"Account Opening\" Fraud Detection Service",
+              "value" : "opening"
+            },
+            "takeover" : {
+              "summary" : "\"Takeover\" Fraud Detection Service",
+              "description" : "Use `takeover` for \"Takeover\" Fraud Detection Service",
+              "value" : "takeover"
+            }
+          },
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "Fraudservices__id" : {
+          "in" : "path",
+          "name" : "fraudservicesId",
+          "required" : true,
+          "description" : "",
+          "example" : "",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "Role__id" : {
+          "in" : "path",
+          "name" : "roleId",
+          "required" : true,
+          "description" : "",
+          "example" : "",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "projectRolesId__id" : {
+          "in" : "path",
+          "name" : "projectRolesId",
+          "required" : true,
+          "description" : "",
+          "example" : "",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "Decision__id" : {
+          "in" : "path",
+          "name" : "decisionId",
+          "required" : true,
+          "description" : "",
+          "example" : "",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "Decisionarchive__id" : {
+          "in" : "path",
+          "name" : "decisionId",
+          "required" : true,
+          "description" : "",
+          "example" : "",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "newDecision__id" : {
+          "in" : "path",
+          "name" : "newDecisionId",
+          "required" : true,
+          "description" : "a newDecisionId",
+          "example" : "63d1319a3b4116d086c1b238",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "If-Match" : {
+          "in" : "header",
+          "name" : "If-Match",
+          "description" : "Current value of the _etag field",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "query__where" : {
+          "in" : "query",
+          "name" : "where",
+          "description" : "the filters query parameter (ex.: {\"number\": 10})",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "query__projections" : {
+          "in" : "query",
+          "name" : "where",
+          "description" : "the projections query parameter (ex.: {\"account.email\": \"smith@example.com\"})",
+          "examples" : {
+            "account.email" : {
+              "summary" : "user's email",
+              "description" : "email of the user who interacts with your client-side SDK integrated application",
+              "value" : "{\"account.email\": \"smith@example.com\"}"
+            }
+          },
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "query__sort" : {
+          "in" : "query",
+          "name" : "sort",
+          "description" : "the sort query parameter (ex.: \"city,-lastname\")",
+          "schema" : {
+            "type" : "string"
+          }
+        },
+        "query__page" : {
+          "in" : "query",
+          "name" : "page",
+          "description" : "the pages query parameter",
+          "schema" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        },
+        "query__max_results" : {
+          "in" : "query",
+          "name" : "max_results",
+          "description" : "the max results query parameter",
+          "schema" : {
+            "type" : "integer",
+            "example" : 25
+          }
+        }
+      },
+      "examples" : {
+        "App" : {
+          "summary" : "An example {0} document.",
+          "description" : "An example for App documents request bodies. Used in POST, PUT, PATCH methods."
+        },
+        "Project" : {
+          "summary" : "An example {0} document.",
+          "description" : "An example for Project documents request bodies. Used in POST, PUT, PATCH methods."
+        },
+        "User" : {
+          "summary" : "An example {0} document.",
+          "description" : "An example for User documents request bodies. Used in POST, PUT, PATCH methods."
+        },
+        "Token" : {
+          "summary" : "An example {0} document.",
+          "description" : "An example for Token documents request bodies. Used in POST, PUT, PATCH methods."
+        },
+        "Fraudservice" : {
+          "summary" : "An example {0} document.",
+          "description" : "An example for Fraudservice documents request bodies. Used in POST, PUT, PATCH methods. All the records will be saved in fraudServiceArchives and only the last one stays here."
+        },
+        "Fraudservicearchive" : {
+          "summary" : "An example {0} document.",
+          "description" : "An example for Fraudservicearchive documents request bodies. Used in POST, PUT, PATCH methods."
+        },
+        "Projectroles" : {
+          "summary" : "An example {0} document.",
+          "description" : "An example for Projectroles documents request bodies. Used in POST, PUT, PATCH methods."
+        },
+        "Decision" : {
+          "summary" : "An example {0} document.",
+          "description" : "An example for Decision documents request bodies. Used in POST, PUT, PATCH methods."
+        },
+        "Decisionarchive" : {
+          "summary" : "An example {0} document.",
+          "description" : "An example for Decisionarchive documents request bodies. Used in POST, PUT, PATCH methods."
+        },
+        "newDecision" : {
+          "summary" : "An example {0} document.",
+          "description" : "An example for newDecision documents request bodies. Used in POST, PUT, PATCH methods."
+        }
+      },
+      "requestBodies" : {
+        "newDecision" : {
+          "description" : "A newDecision or list of newDecision documents",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/newDecision"
+              },
+              "examples" : {
+                "newDecision" : {
+                  "$ref" : "#/components/examples/newDecision"
+                }
+              }
+            }
+          }
+        },
+        "newDecision_post" : {
+          "description" : "Use 'sample' example when you want to ask for decision synchronously or asynchronously.",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/newDecision_post"
+              },
+              "examples" : {
+                "sample" : {
+                  "value" : {
+                    "account" : {
+                      "email" : "smith@example.com"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Matomo_post" : {
+          "description" : "Matomo events",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/newDecision_post"
+              },
+              "examples" : {
+                "Event" : {
+                  "value" : {
+                    "requests" : [ "idsite=69&send_image=0&res=1080x2280&e_a=notSubmitted&e_c=onFocusChange&ua=Dalvik%2F2.1.0%20%28Linux%3B%20U%3B%20Android%208.1.0%3B%20Android%20SDK%20built%20for%20x86%20Build%2FOSM1.180201.037%29&url=https%3A%2F%2Fcom.bita.bitatrackerapp.bacheha%2Factivity_login%2Factivity_login%2Ffragment_login%20&rand=98349&rec=1&apiv=1&uid=d1ff33fa99667872667743ea236cb14b&cdt=2022-08-20%2018%3A51%3A37%2B0430&e_n=email%20%3A%20mobina6%40gmail.com&_id=3c803e85d0cff548&lang=en" ]
+                  }
+                },
+                "PageView" : {
+                  "value" : {
+                    "requests" : [ "_viewts=1661004632&idsite=69&send_image=0&res=1080x2280&_idvc=6&ua=Dalvik%2F2.1.0%20%28Linux%3B%20U%3B%20Android%208.1.0%3B%20Android%20SDK%20built%20for%20x86%20Build%2FOSM1.180201.037%29&url=https%3A%2F%2Fcom.bita.bitatrackerapp.bacheha%2FSplashScreenActivity%20&rand=58688&rec=1&apiv=1&uid=d1ff33fa99667872667743ea236cb14b&_idts=1661004450&cdt=2022-08-20%2019%3A03%3A09%2B0430&action_name=SplashScreen&_id=3c803e85d0cff548&new_visit=1&lang=en" ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "securitySchemes" : {
+        "bearerAuth" : {
+          "type" : "http",
+          "scheme" : "bearer",
+          "bearerFormat" : "JWT"
+        },
+        "APIKeyHeader": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "X-API-Key"
+        }
+      }
+    },
+    "security" : [ {
+      "bearerAuth" : [ ],
+      "APIKeyHeader" : []
+    } ],
+    "tags" : [ {
+      "name" : "newDecision"
+    }]
+  }
+  
