@@ -75,5 +75,5 @@ This API requires the following dependencies:
 
 ## Troubleshooting
 
-If you have any issues , contact us at <a href="mailto:support@crossclassify.com">support@crossclassify.com</a>.
+If you have any issues , contact us at [support@crossclassify.com](mailto:support@crossclassify.com).
 
