@@ -30,6 +30,8 @@ Before you can use the CrossClassify API, ensure that your environment is set up
 
 ## Usage
 
+Before you start using the CrossClassify API, please note that getting decision from CrossClassify is an asynchronous operation. There should be no waiting for the result of the decision and the whole decision making should be considered asynchronous.
+
 ### Making a New Decision
 
 **Endpoint:** `/projects/{projectId}/fraudServices/{serviceName}/newDecision`
